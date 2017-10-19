@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -148,7 +150,95 @@ public class BinaryST_Tests {
         bst.remove("HELLO");
         assertFalse(bst.search("HELLO"));
     }
-    /*
+    @Test
+    public void removePositive2(){
+        BinaryST bst = new BinaryST();
+
+        bst.add("HELLO");
+        bst.add("GOODBYE");
+        bst.add("NOPE");
+        bst.add("THINGS");
+        bst.add("STUFF");
+        bst.remove("HELLO");
+        bst.remove("GOODBYE");
+        bst.remove("NOPE");
+        bst.remove("THINGS");
+        bst.remove("STUFF");
+
+        assertFalse(bst.search("HELLO"));
+        assertFalse(bst.search("GOODBYE"));
+        assertFalse(bst.search("NOPE"));
+        assertFalse(bst.search("THINGS"));
+        assertFalse(bst.search("STUFF"));
+    }
+    @Test
+    public void removePositive3(){
+        BinaryST bst = new BinaryST();
+
+        bst.add("HELLO");
+        bst.add("GOODBYE");
+        bst.add("NOPE");
+        bst.add("NOPE");
+        bst.add("NOPE");
+        bst.add("NOPE");
+        bst.remove("NOPE");
+        assertTrue(bst.search("NOPE"));
+        bst.remove("NOPE");
+        bst.remove("NOPE");
+        bst.remove("NOPE");
+        assertFalse(bst.search("NOPE"));
+
+    }
+
+    @Test
+    public void removeNegative(){
+        BinaryST bst = new BinaryST();
+
+        bst.remove("HELLO");
+        bst.remove("GOODBYE");
+        bst.remove("NOPE");
+        bst.remove("THINGS");
+        bst.remove("STUFF");
+
+        assertFalse(bst.search("HELLO"));
+        assertFalse(bst.search("GOODBYE"));
+        assertFalse(bst.search("NOPE"));
+        assertFalse(bst.search("THINGS"));
+        assertFalse(bst.search("STUFF"));
+    }
+
+    @Test
+    public void inOrderTraversalPositive2(){
+        String[] array = {"a","b","c","d","e"};
+        BinaryST bst = new BinaryST();
+
+        bst.add("b");
+        bst.add("a");
+        bst.add("c");
+        bst.add("d");
+        bst.add("e");
+
+        String[] s = bst.inOrder();
+        for(int i =0; i<s.length; i++){
+            assertTrue(s[i].equals(array[i]));
+        }
+    }
+    @Test
+    public void preOrderTraversalPositive(){
+        String[] array = {"b","a","c","d","e"};
+        BinaryST bst = new BinaryST();
+
+        bst.add("b");
+        bst.add("a");
+        bst.add("c");
+        bst.add("d");
+        bst.add("e");
+
+        String[] s = bst.preOrder();
+        for(int i =0; i<s.length; i++){
+            assertTrue(s[i].equals(array[i]));
+        }
+    }
     @Test
     public void compareToDemo(){
         BinaryST bst = new BinaryST();
@@ -157,5 +247,5 @@ public class BinaryST_Tests {
         System.out.println("hi and hi: "+bst.compareTo("HI", "HI"));
         System.out.println("alpha and zeta: "+bst.compareTo("ALPHA", "ZETA"));
         assertTrue(bst.size() == 5);
-    }*/
+    }
 }

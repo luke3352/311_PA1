@@ -122,7 +122,9 @@ public class BinaryST
     public boolean search(String s)
     {
         Node node = root;
-
+        if(root == null){
+            return false;
+        }
         while(node.key != s){
 
             if(node != null) {
@@ -179,10 +181,62 @@ public class BinaryST
      */
     public boolean remove(String s)
     {
-        boolean isRemoved = false;
-
-        return isRemoved;
+       if(size()!=0){
+           if(search(s)!= false){
+               root = delete(root, s);
+               return true;
+           }
+       }
+       return false;
     }
+
+    private Node delete(Node node, String s){
+        Node p, p2, n;
+
+        if (node.key.equals(s))
+        {
+            if(node.frequency >1){
+                node.frequency--;
+                return node;
+            }
+            Node lt, rt;
+            lt = node.left;
+            rt = node.right;
+            if (lt == null && rt == null)
+                return null;
+            else if (lt == null)
+            {
+                p = rt;
+                return p;
+            }
+            else if (rt == null)
+            {
+                p = lt;
+                return p;
+            }
+            else
+            {
+                p2 = rt;
+                p = rt;
+                while (p.left != null)
+                    p = p.left;
+                p.left=lt;
+                return p2;
+            }
+        }
+        if (node.key.compareTo(s) >0 )
+        {
+            n = delete(node.left, s);
+            node.left = n;
+        }
+        else
+        {
+            n = delete(node.right, s);
+            node.right=n;
+        }
+        return node;
+    }
+
     /**
      *inOrder() Returns an array of Strings obtained by doing an in-order traversal of the tree.
      */
@@ -190,7 +244,7 @@ public class BinaryST
     {   ArrayList<String> list = new ArrayList<>();
         list = inOrderTraversal(root,list);
 
-        String[] s = new String[height()];
+        String[] s = new String[list.size()];
         for(int i =0; i<list.size(); i++){
             s[i] = list.get(i);
         }
@@ -200,7 +254,7 @@ public class BinaryST
      *Created by Luke
      * Returns an arraylist<String> inOrder Traversal
      */
-    public ArrayList<String> inOrderTraversal(Node node, ArrayList<String> list)
+    private ArrayList<String> inOrderTraversal(Node node, ArrayList<String> list)
     {
         if(node.left != null){
             inOrderTraversal(node.left, list);
@@ -219,7 +273,7 @@ public class BinaryST
         ArrayList<String> list = new ArrayList<>();
         list = preOrderTraversal(root,list);
 
-        String[] s = new String[height()];
+        String[] s = new String[list.size()];
         for(int i =0; i<list.size(); i++){
             s[i] = list.get(i);
         }
@@ -229,7 +283,7 @@ public class BinaryST
      * Created by Luke
      * Returns an arraylist<String> preOrder Traversal
      */
-    public ArrayList<String> preOrderTraversal(Node node, ArrayList<String> list)
+    private ArrayList<String> preOrderTraversal(Node node, ArrayList<String> list)
     {
         list.add(node.key);
         if(node.left != null){
