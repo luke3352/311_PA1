@@ -259,7 +259,10 @@ public class BinaryST
         if(node.left != null){
             inOrderTraversal(node.left, list);
         }
-        list.add(node.key);
+        //if the same string is added 5 times, print it 5 times
+        for(int i = node.frequency; i>0; i--){
+            list.add(node.key);
+        }
         if(node.right != null){
             inOrderTraversal(node.right, list);
         }
@@ -285,7 +288,12 @@ public class BinaryST
      */
     private ArrayList<String> preOrderTraversal(Node node, ArrayList<String> list)
     {
-        list.add(node.key);
+
+       //if the same string is added 5 times, print it 5 times
+        for(int i = node.frequency; i>0; i--){
+            list.add(node.key);
+        }
+
         if(node.left != null){
             preOrderTraversal(node.left, list);
         }

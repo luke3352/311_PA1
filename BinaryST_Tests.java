@@ -224,6 +224,24 @@ public class BinaryST_Tests {
         }
     }
     @Test
+    public void inOrderTraversalPositive3(){
+        String[] array = {"a","b","c","d","e","e","e"};
+        BinaryST bst = new BinaryST();
+
+        bst.add("b");
+        bst.add("a");
+        bst.add("c");
+        bst.add("d");
+        bst.add("e");
+        bst.add("e");
+        bst.add("e");
+
+        String[] s = bst.inOrder();
+        for(int i =0; i<s.length; i++){
+            assertTrue(s[i].equals(array[i]));
+        }
+    }
+    @Test
     public void preOrderTraversalPositive(){
         String[] array = {"b","a","c","d","e"};
         BinaryST bst = new BinaryST();
@@ -232,6 +250,24 @@ public class BinaryST_Tests {
         bst.add("a");
         bst.add("c");
         bst.add("d");
+        bst.add("e");
+
+        String[] s = bst.preOrder();
+        for(int i =0; i<s.length; i++){
+            assertTrue(s[i].equals(array[i]));
+        }
+    }
+    @Test
+    public void preOrderTraversalPositive2(){
+        String[] array = {"b","a","c","d","e","e","e"};
+        BinaryST bst = new BinaryST();
+
+        bst.add("b");
+        bst.add("a");
+        bst.add("c");
+        bst.add("d");
+        bst.add("e");
+        bst.add("e");
         bst.add("e");
 
         String[] s = bst.preOrder();
