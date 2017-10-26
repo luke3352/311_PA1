@@ -9,20 +9,21 @@
 
 import java.util.ArrayList;
 
-
 public class WarWithBST
 {
     // member fields and methods
-
+    BinaryST bst;
     public WarWithBST(String[] s, int k)
     {
-        // implementation
+         bst = new BinaryST(s);
+
     }
 
     public ArrayList<String> compute2k()
     {
-        // implementation
-        return null;
+        ArrayList<String> list = new ArrayList<>();
+
+        return list;
     }
 }
 

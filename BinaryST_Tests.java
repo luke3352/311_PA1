@@ -276,6 +276,23 @@ public class BinaryST_Tests {
         }
     }
     @Test
+    public void height(){
+        BinaryST bst = new BinaryST();
+        bst.add("a");
+        assertTrue(bst.maxHeight == 1);
+    }
+    @Test
+    public void height2(){
+        BinaryST bst = new BinaryST();
+        bst.add("a");
+        bst.add("b");
+        bst.add("c");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        assertTrue(bst.maxHeight == 6);
+    }
+    @Test
     public void compareToDemo(){
         BinaryST bst = new BinaryST();
         System.out.println("hello and nope: "+bst.compareTo("HELLO", "NOPE"));
@@ -284,4 +301,76 @@ public class BinaryST_Tests {
         System.out.println("alpha and zeta: "+bst.compareTo("ALPHA", "ZETA"));
         assertTrue(bst.size() == 5);
     }
+    @Test
+    public void test2(){
+        int[] a = {1,2,3,4,5,6,7,8,9,11,12,13,14,15};
+        int[] a2 = {9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-7};
+        int[] a3 =  {7,7,7,7,7,7,7,7,7,7,7,7,7,7};
+        int largest, second =0;
+
+        if(a[0] < a[1]){
+            largest = a[1];
+            second = a[0];
+        }
+        else{
+            largest = a[0];
+            second = a[1];
+        }
+        int comparisons = 1;
+
+        for(int i =2; i<a.length; i++){
+            if(a[i]>second){
+                if(a[i] >largest){
+                    second=largest;
+                    largest=a[i];
+                    comparisons+=2;
+                    }else {
+                        second = a[i];
+                        comparisons += 2;
+                    }
+                }
+                else comparisons++;
+            }
+
+        System.out.println("comparison:"+ comparisons);
+    }
+
+
+    @Test
+    public void test(){
+        int[] a3 = {1,2,3,4,5,6,7,8,9,11,12,13,14,15};
+        int[] a = {9,8,7,6,5,4,3,2,1,0};
+        //          9   7   5   3   1
+        //             9        5    1
+        //                   9        1
+        int[] a2 =  {7,7,7,7,7,7,7,7,7,7,7,7,7,7};
+        int largest, second =0;
+
+        if(a[0] < a[1]){
+            largest = a[1];
+            second = a[0];
+        }
+        else{
+            largest = a[0];
+            second = a[1];
+        }
+        int comparisons = 1;
+        for(int i =2; i<a.length; i++){
+            if(a[i] >largest){
+                second=largest;
+                largest=a[i];
+                comparisons++;
+            }
+            else{
+                if(a[i]>second){
+                    second = a[i];
+                    comparisons+=2;
+                }
+                else comparisons+=2;
+            }
+        }
+        System.out.println("comparison:"+ comparisons);
+    }
+
+
 }

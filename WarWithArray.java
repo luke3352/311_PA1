@@ -13,16 +13,33 @@ import java.util.ArrayList;
 public class WarWithArray
 {
     // member fields and methods
-
+    String[] str;
+    int size;
     public WarWithArray(String[] s, int k)
     {
-        // implementation
+        str = s;
+        size = k;
     }
 
     public ArrayList<String> compute2k()
     {
-        // implementation
+        ArrayList<String> list = new ArrayList<>();
+
+        for(int i =0; i<str.length; i++){
+            for(int j =0; j<str.length; j++){
+
+            }
+        }
+        list.add(j);
         return null;
+    }
+    private void permute(String[] str, int l, int r ){
+        for (int i = l; i <= r; i++)
+        {
+            str = swap(str,l,i);
+            permute(str, l+1, r);
+            str = swap(str,l,i);
+        }
     }
 }
 

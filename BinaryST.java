@@ -19,6 +19,7 @@ public class BinaryST
         String key;
         Node left, right;
         int frequency;
+        int height;
         public Node(String item) {
             key = item;
             left = right = null;
@@ -79,31 +80,39 @@ public class BinaryST
      */
     public void add(String s)
     {
-        addRec(root, s);
+        addRec(root, s, 1);
         size++;
     }
 
-    public Node addRec(Node node, String key) {
+    public Node addRec(Node node, String key, int height) {
 
         /* If the tree is empty, return a new node */
         if (node == null) {
             if(size == 0){
                 root = new Node(key);
                 root.frequency++;
+                root.height = height;
             }
             else{
                 node = new Node(key);
                 node.frequency++;
+                node.height = height;
+            }
+            if(height > maxHeight){
+                maxHeight = height;
             }
             distinctStrings++;
             return node;
         }
 
         /* Otherwise, recur down the tree */
-        if (key.compareTo(node.key) < 0)
-            node.left = addRec(node.left, key);
+        if (key.compareTo(node.key) < 0) {
+            height++;
+            node.left = addRec(node.left, key, height);
+        }
         else if(key.compareTo(node.key) > 0){
-            node.right = addRec(node.right, key);
+            height++;
+            node.right = addRec(node.right, key,height);
         }
         else{
             node.frequency++;
