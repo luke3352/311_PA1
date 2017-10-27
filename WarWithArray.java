@@ -7,7 +7,9 @@
 // DO NOT INCLUDE LIBRARIES OUTSIDE OF THE JAVA STANDARD LIBRARY
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class WarWithArray
@@ -23,23 +25,25 @@ public class WarWithArray
 
     public ArrayList<String> compute2k()
     {
-        ArrayList<String> list = new ArrayList<>();
 
-        for(int i =0; i<str.length; i++){
-            for(int j =0; j<str.length; j++){
+        ArrayList<String> modArr = new ArrayList<>();
+        ArrayList<String> original = new ArrayList<>(Arrays.asList(str));
 
+        modArr = original;
+        for(int i =0; i<size-1; i++){
+            modArr = permute(original, modArr);
+        }
+
+        return modArr;
+    }
+    private ArrayList<String> permute(ArrayList<String> original, ArrayList<String> modArr) {
+        ArrayList<String> newList = new ArrayList<>();
+        for (int i = 0; i < modArr.size(); i++) {
+            for (int j = 0; j < original.size(); j++) {
+                newList.add(modArr.get(i)+""+original.get(j));
             }
         }
-        list.add(j);
-        return null;
-    }
-    private void permute(String[] str, int l, int r ){
-        for (int i = l; i <= r; i++)
-        {
-            str = swap(str,l,i);
-            permute(str, l+1, r);
-            str = swap(str,l,i);
-        }
+        return newList;
     }
 }
 

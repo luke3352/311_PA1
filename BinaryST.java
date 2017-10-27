@@ -91,27 +91,27 @@ public class BinaryST
             if(size == 0){
                 root = new Node(key);
                 root.frequency++;
-                root.height = height;
+                //root.height = height;
             }
             else{
                 node = new Node(key);
                 node.frequency++;
-                node.height = height;
+                //node.height = height;
             }
-            if(height > maxHeight){
-                maxHeight = height;
-            }
+            //if(height > maxHeight){
+            //    maxHeight = height;
+            //}
             distinctStrings++;
             return node;
         }
 
         /* Otherwise, recur down the tree */
         if (key.compareTo(node.key) < 0) {
-            height++;
+            //height++;
             node.left = addRec(node.left, key, height);
         }
         else if(key.compareTo(node.key) > 0){
-            height++;
+            //height++;
             node.right = addRec(node.right, key,height);
         }
         else{

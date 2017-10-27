@@ -8,22 +8,41 @@
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WarWithBST
 {
     // member fields and methods
     BinaryST bst;
+    int size;
+    String[] str;
     public WarWithBST(String[] s, int k)
     {
-         bst = new BinaryST(s);
-
+        str = s;
+        size = k;
+        bst = new BinaryST(s);
     }
 
     public ArrayList<String> compute2k()
     {
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> modArr = new ArrayList<>();
+        String[] bstArray = bst.inOrder();
+        ArrayList<String> original = new ArrayList<>(Arrays.asList(bstArray));
+        modArr = original;
 
-        return list;
+        for(int i =0; i<size-1; i++){
+            modArr = permute(original, modArr);
+        }
+        return modArr;
+    }
+    private ArrayList<String> permute(ArrayList<String> original, ArrayList<String> modArr) {
+        ArrayList<String> newList = new ArrayList<>();
+        for (int i = 0; i < modArr.size(); i++) {
+            for (int j = 0; j < original.size(); j++) {
+                newList.add(modArr.get(i)+""+original.get(j));
+            }
+        }
+        return newList;
     }
 }
 

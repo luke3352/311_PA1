@@ -8,21 +8,32 @@
 //  (i.e., you may include java.util.ArrayList etc. here, but not junit, apache commons, google guava, etc.)
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 
 public class WarWithHash
 {
     // member fields and methods
-
+    int size;
+    String[] str;
+    HashMap hash = new HashMap<>();
     public WarWithHash(String[] s, int k)
     {
-        // implementation
+        str = s;
+        size = k;
     }
 
     public ArrayList<String> compute2k()
     {
-        // implementation
-        return null;
+        ArrayList<String> modArr = new ArrayList<>();
+        for(int i=0; i<str.length; i++){
+            hash.put(str[i],str[i]);
+        }
+
+
+        return modArr;
     }
+
 }
 
