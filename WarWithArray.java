@@ -71,10 +71,6 @@ public class WarWithArray
             else break;
         }
         return true;
-
-
-
-
     }
 }
 

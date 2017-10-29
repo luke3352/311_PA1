@@ -8,11 +8,11 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Luke Sternhagen on 10/26/2017.
  */
-public class WarWithBST_Test {
+public class WarWithHash_Test {
     @Test
     public void test(){
         String[] s = {"AC","CA","CC"};
-        WarWithBST war = new WarWithBST(s, 2);
+        WarWithHash war = new WarWithHash(s, 2);
 
         ArrayList<String> list = war.compute2k();
         System.out.println(list.toString());
@@ -34,7 +34,7 @@ public class WarWithBST_Test {
     @Test
     public void test2(){
         String[] s = {"ABC","BCD","CDE", "DEF", "EFG", "FGH", "GHI"};
-        WarWithBST war = new WarWithBST(s, 3);
+        WarWithHash war = new WarWithHash(s, 3);
 
         ArrayList<String> list = war.compute2k();
         System.out.println(list.toString());
