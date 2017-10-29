@@ -29,10 +29,10 @@ public class BinaryST
         }
     }
 
-    Node root;
-    int size;
-    int distinctStrings;
-    boolean deleted;
+    private Node root;
+    private int size;
+    private int distinctStrings;
+    private boolean deleted;
     //BinaryST() Creates an empty Binary Search Tree.
 
     public BinaryST()
@@ -84,7 +84,7 @@ public class BinaryST
      */
     public void add(String s)
     {
-        addRec(root, s, 1);
+        addRec(root, s);
         size++;
     }
 
@@ -99,15 +99,15 @@ public class BinaryST
 
         /* Otherwise, recur down the tree */
         if (key.compareTo(node.key) < 0) {
-            node.left = addRec(node.left, key, height);
+            node.left = addRec(node.left, key);
             node.left.parent = node;
-            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+            node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
             node.numOfLeftChildren++;
         }
         else if(key.compareTo(node.key) > 0){
-            node.right = addRec(node.right, key,height);
+            node.right = addRec(node.right, key);
             node.right.parent = node;
-            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+            node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
         }
         else {
             node.frequency++;
@@ -130,7 +130,7 @@ public class BinaryST
     private Node serachHelper(String s) {
         Node node = root;
         if(root == null){
-            return false;
+            return null;
         }
         while(node.key != s){
             if(node != null) {
@@ -186,51 +186,52 @@ public class BinaryST
      */
     public boolean remove(String s) {
         deleted = false;
-        boolean temp = deleteNode(root, s);
+        deleteNode(root, s);
+        boolean temp = deleted;
         deleted = false;
         return temp;
     }
 
-    public Node deleteNode(Node root, int key) {
-        if(root == null){
+    public Node deleteNode(Node node, String key) {
+        if(node == null){
             return null;
         }
-        if(node.key.compareTo(s) > 0){
-            root.left = deleteNode(root.left, key);
-            if (deleted == true) {
-                root.numOfLeftChildren--;
+        if(node.key.compareTo(key) > 0){
+            node.left = deleteNode(node.left, key);
+            if (deleted) {
+                node.numOfLeftChildren--;
             }
-            if (root.left != null) {
-                root.left.parent = root;
-            }
-            // Update height
-            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
-        } else if(node.key.compareTo(s) < 0){
-            root.right = deleteNode(root.right, key);
-            if (root.right != null) {
-                root.right.parent = root;
+            if (node.left != null) {
+                node.left.parent = node;
             }
             // Update height
-            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+            node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+        } else if(node.key.compareTo(key) < 0){
+            node.right = deleteNode(node.right, key);
+            if (node.right != null) {
+                node.right.parent = node;
+            }
+            // Update height
+            node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
         } else {
             deleted = true;
-            if (root.frequency >= 2) {
-                root.frequency--;
-                return root
+            if (node.frequency >= 2) {
+                node.frequency--;
+                return root;
             } else {
-                if(root.left == null){
-                    return root.right;
-                } else if(root.right == null){
-                    return root.left;
+                if(node.left == null){
+                    return node.right;
+                } else if(node.right == null){
+                    return node.left;
                 }
 
-                Node minNode = findMin(root.right);
-                root.val = minNode.val;
-                root.right = deleteNode(root.right, root.val);
-                root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+                Node minNode = findMin(node.right);
+                node.key = minNode.key;
+                node.right = deleteNode(node.right, node.key);
+                node.height = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
             }
         }
-        return root;
+        return node;
     }
 
     private Node findMin(Node node){
