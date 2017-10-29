@@ -30,9 +30,9 @@ public class WarWithArray
         ArrayList<String> original = new ArrayList<>(Arrays.asList(str));
 
         modArr = original;
-        for(int i =0; i<size-1; i++){
-            modArr = permute(original, modArr);
-        }
+
+        modArr = permute(original, modArr);
+
 
         return modArr;
     }
@@ -40,10 +40,41 @@ public class WarWithArray
         ArrayList<String> newList = new ArrayList<>();
         for (int i = 0; i < modArr.size(); i++) {
             for (int j = 0; j < original.size(); j++) {
-                newList.add(modArr.get(i)+""+original.get(j));
+                if(checkValid(modArr.get(i)+original.get(j))){
+                    newList.add(modArr.get(i) + original.get(j));
+                }
             }
         }
         return newList;
+    }
+
+    private boolean checkValid(String word){
+        char[] char1 = word.toCharArray();
+        for(int i=0; i<char1.length; i++){
+            if((i+size) <= char1.length){
+                String checkWord = "";
+                //creating the word
+                for(int j =i; j<size+i; j++){
+                        checkWord += char1[j];
+                }
+                boolean isTrue = false;
+                for(int k =0; k<str.length; k++){
+                    if(checkWord.equals(str[k])) {
+                        isTrue = true;
+                        break;
+                    }
+                }
+                if(!isTrue){
+                    return false;
+                }
+            }
+            else break;
+        }
+        return true;
+
+
+
+
     }
 }
 
