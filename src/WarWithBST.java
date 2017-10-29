@@ -18,6 +18,7 @@ public class WarWithBST
     private int size;
 
     public WarWithBST(String[] s, int k) {
+        str = new ArrayList<>();
         str.addAll(Arrays.asList(s));
         size = k;
         bst = new BinaryST(s);
