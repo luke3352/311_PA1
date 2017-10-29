@@ -17,19 +17,22 @@ public class BinaryST
 {
     class Node {
         String key;
-        Node left, right;
+        Node left, right, parent;
         int frequency;
         int height;
+        int numOfLeftChildren;
         public Node(String item) {
             key = item;
-            left = right = null;
+            left = null;
+            right = null;
+            parent = null;
         }
     }
 
     Node root;
     int size;
     int distinctStrings;
-    int maxHeight;
+    boolean deleted;
     //BinaryST() Creates an empty Binary Search Tree.
 
     public BinaryST()
@@ -58,22 +61,23 @@ public class BinaryST
     {
         return distinctStrings;
     }
+
     /**
      *size() Returns the total number of elements stored in tree. If you have added “AB”, “CD”, “AB”,
      *then this method returns 3.
      */
-    public int size()
-    {
-        return distinctStrings;
+    public int size() {
+        return size;
     }
+
     /**
      *height() returns the current height of the tree. Height of a tree with a single node is one. Height
      *of an empty tree is zero
      */
-    public int height()
-    {
-        return maxHeight;
+    public int height() {
+        return root.height;
     }
+
     /**
      *add(String s). Adds the string s to the BST. Even if s already appears in the tree, it must
      *add s.
@@ -84,41 +88,31 @@ public class BinaryST
         size++;
     }
 
-    public Node addRec(Node node, String key, int height) {
-
-        /* If the tree is empty, return a new node */
+    public Node addRec(Node node, String key) {
         if (node == null) {
-            if(size == 0){
-                root = new Node(key);
-                root.frequency++;
-                //root.height = height;
-            }
-            else{
-                node = new Node(key);
-                node.frequency++;
-                //node.height = height;
-            }
-            //if(height > maxHeight){
-            //    maxHeight = height;
-            //}
+            node = new Node(key);
+            node.frequency = 1;
+            node.height = 1;
             distinctStrings++;
             return node;
         }
 
         /* Otherwise, recur down the tree */
         if (key.compareTo(node.key) < 0) {
-            //height++;
             node.left = addRec(node.left, key, height);
+            node.left.parent = node;
+            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+            node.numOfLeftChildren++;
         }
         else if(key.compareTo(node.key) > 0){
-            //height++;
             node.right = addRec(node.right, key,height);
+            node.right.parent = node;
+            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
         }
-        else{
+        else {
             node.frequency++;
         }
 
-        /* return the (unchanged) node pointer */
         return node;
     }
     public int compareTo(String s, String s2){
@@ -130,14 +124,16 @@ public class BinaryST
      */
     public boolean search(String s)
     {
+        return serachHelper(s) != null;
+    }
+
+    private Node serachHelper(String s) {
         Node node = root;
         if(root == null){
             return false;
         }
         while(node.key != s){
-
             if(node != null) {
-
                 //go to left tree
                 if(node.key.compareTo(s) > 0){
                     node = node.left;
@@ -148,11 +144,11 @@ public class BinaryST
 
                 //not found
                 if(node == null){
-                    return false;
+                    return null;
                 }
             }
         }
-        return true;
+        return node;
     }
 
     /**
@@ -188,63 +184,70 @@ public class BinaryST
      *true. If s does not appear in the tree, then returns false. If s appears, more than once then
      *remove only one occurrence.
      */
-    public boolean remove(String s)
-    {
-       if(size()!=0){
-           if(search(s)!= false){
-               root = delete(root, s);
-               return true;
-           }
-       }
-       return false;
+    public boolean remove(String s) {
+        deleted = false;
+        boolean temp = deleteNode(root, s);
+        deleted = false;
+        return temp;
     }
 
-    private Node delete(Node node, String s){
-        Node p, p2, n;
+    public Node deleteNode(Node root, int key) {
+        if(root == null){
+            return null;
+        }
+        if(node.key.compareTo(s) > 0){
+            root.left = deleteNode(root.left, key);
+            if (deleted == true) {
+                root.numOfLeftChildren--;
+            }
+            if (root.left != null) {
+                root.left.parent = root;
+            }
+            // Update height
+            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+        } else if(node.key.compareTo(s) < 0){
+            root.right = deleteNode(root.right, key);
+            if (root.right != null) {
+                root.right.parent = root;
+            }
+            // Update height
+            root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
+        } else {
+            deleted = true;
+            if (root.frequency >= 2) {
+                root.frequency--;
+                return root
+            } else {
+                if(root.left == null){
+                    return root.right;
+                } else if(root.right == null){
+                    return root.left;
+                }
 
-        if (node.key.equals(s))
-        {
-            if(node.frequency >1){
-                node.frequency--;
-                return node;
-            }
-            Node lt, rt;
-            lt = node.left;
-            rt = node.right;
-            if (lt == null && rt == null)
-                return null;
-            else if (lt == null)
-            {
-                p = rt;
-                return p;
-            }
-            else if (rt == null)
-            {
-                p = lt;
-                return p;
-            }
-            else
-            {
-                p2 = rt;
-                p = rt;
-                while (p.left != null)
-                    p = p.left;
-                p.left=lt;
-                return p2;
+                Node minNode = findMin(root.right);
+                root.val = minNode.val;
+                root.right = deleteNode(root.right, root.val);
+                root.height = Math.max(getHeight(root.left), getHeight(root.right)) + 1;
             }
         }
-        if (node.key.compareTo(s) >0 )
-        {
-            n = delete(node.left, s);
-            node.left = n;
-        }
-        else
-        {
-            n = delete(node.right, s);
-            node.right=n;
+        return root;
+    }
+
+    private Node findMin(Node node){
+        while(node.left != null){
+            node = node.left;
         }
         return node;
     }
+
+    private int getHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return node.height;
+    }
+
+
 
     /**
      *inOrder() Returns an array of Strings obtained by doing an in-order traversal of the tree.
@@ -311,13 +314,23 @@ public class BinaryST
         }
         return list;
     }
+
     /**
      *rankOf(String s) Returns number of strings that are smaller than s.
      */
     public int rankOf(String s)
     {
-        int rankOf = 0;
+        Node node = serachHelper(s);
+        if (node == null) {
+            return -1;
+        }
 
-        return rankOf;
+        int rank = node.numOfLeftChildren;
+        while (node.parent != null && node.parent.right == node) {
+            node = node.parent;
+            rank += node.numOfLeftChildren + 1;
+        }
+
+        return rank;
     }
 }
