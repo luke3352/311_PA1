@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Array;
@@ -13,7 +14,7 @@ public class BinaryST_Tests {
     public void addTest(){
         BinaryST bst = new BinaryST();
         bst.add("HELLO");
-        assertTrue(bst.size() == 1);
+        Assert.assertTrue(bst.size() == 1);
     }
 
     @Test
@@ -24,14 +25,14 @@ public class BinaryST_Tests {
         bst.add("NOPE");
         bst.add("THINGS");
         bst.add("STUFF");
-        assertTrue(bst.size() == 5);
+        Assert.assertTrue(bst.size() == 5);
     }
 
     @Test
     public void searchTestPositive1(){
         BinaryST bst = new BinaryST();
         bst.add("HELLO");
-        assertTrue(bst.search("HELLO"));
+        Assert.assertTrue(bst.search("HELLO"));
     }
     @Test
     public void searchTestPositive2(){
@@ -41,11 +42,11 @@ public class BinaryST_Tests {
         bst.add("NOPE");
         bst.add("THINGS");
         bst.add("STUFF");
-        assertTrue(bst.search("HELLO"));
-        assertTrue(bst.search("GOODBYE"));
-        assertTrue(bst.search("NOPE"));
-        assertTrue(bst.search("THINGS"));
-        assertTrue(bst.search("STUFF"));
+        Assert.assertTrue(bst.search("HELLO"));
+        Assert.assertTrue(bst.search("GOODBYE"));
+        Assert.assertTrue(bst.search("NOPE"));
+        Assert.assertTrue(bst.search("THINGS"));
+        Assert.assertTrue(bst.search("STUFF"));
     }
     @Test
     public void searchTestNegative1(){
@@ -55,11 +56,11 @@ public class BinaryST_Tests {
         bst.add("NOPE");
         bst.add("THINGS");
         bst.add("STUFF");
-        assertFalse(bst.search("HELL"));
-        assertFalse(bst.search("GOODBY"));
-        assertFalse(bst.search("NOP"));
-        assertFalse(bst.search("THING"));
-        assertFalse(bst.search("STUF"));
+        Assert.assertFalse(bst.search("HELL"));
+        Assert.assertFalse(bst.search("GOODBY"));
+        Assert.assertFalse(bst.search("NOP"));
+        Assert.assertFalse(bst.search("THING"));
+        Assert.assertFalse(bst.search("STUF"));
     }
     @Test
     public void frequencyTestPostive1(){
@@ -73,8 +74,8 @@ public class BinaryST_Tests {
         bst.add("GOODBYE");
         bst.add("GOODBYE");
         bst.add("GOODBYE");
-        assertTrue(bst.frequency("HELLO")==3);
-        assertTrue(bst.frequency("GOODBYE")==6);
+        Assert.assertTrue(bst.frequency("HELLO")==3);
+        Assert.assertTrue(bst.frequency("GOODBYE")==6);
     }
     @Test
     public void frequencyTestNegative1(){
@@ -88,7 +89,7 @@ public class BinaryST_Tests {
         bst.add("GOODBYE");
         bst.add("GOODBYE");
         bst.add("GOODBYE");
-        assertTrue(bst.frequency("Nope")==0);
+        Assert.assertTrue(bst.frequency("Nope")==0);
 
     }
     @Test
@@ -109,7 +110,7 @@ public class BinaryST_Tests {
         bst.add("NOPE");
         bst.add("THINGS");
         bst.add("STUFF");
-        assertTrue(bst.distinctSize()==5);
+        Assert.assertTrue(bst.distinctSize()==5);
     }
     @Test
     public void distinctSizesPositive2(){
@@ -120,7 +121,7 @@ public class BinaryST_Tests {
         bst.add("HELLO");
         bst.add("HELLO");
         bst.add("HELLO");
-        assertTrue(bst.distinctSize()==1);
+        Assert.assertTrue(bst.distinctSize()==1);
     }
     @Test
     public void constructorMethod(){
@@ -132,11 +133,11 @@ public class BinaryST_Tests {
         s[4] = "STUFF";
         BinaryST bst = new BinaryST(s);
 
-        assertTrue(bst.search("HELLO"));
-        assertTrue(bst.search("GOODBYE"));
-        assertTrue(bst.search("NOPE"));
-        assertTrue(bst.search("THINGS"));
-        assertTrue(bst.search("STUFF"));
+        Assert.assertTrue(bst.search("HELLO"));
+        Assert.assertTrue(bst.search("GOODBYE"));
+        Assert.assertTrue(bst.search("NOPE"));
+        Assert.assertTrue(bst.search("THINGS"));
+        Assert.assertTrue(bst.search("STUFF"));
     }
     @Test
     public void removePositive(){
@@ -148,7 +149,7 @@ public class BinaryST_Tests {
         bst.add("THINGS");
         bst.add("STUFF");
         bst.remove("HELLO");
-        assertFalse(bst.search("HELLO"));
+        Assert.assertFalse(bst.search("HELLO"));
     }
     @Test
     public void removePositive2(){
@@ -165,13 +166,13 @@ public class BinaryST_Tests {
         bst.remove("THINGS");
         bst.remove("STUFF");
 
-        assertFalse(bst.search("HELLO"));
-        assertFalse(bst.search("GOODBYE"));
-        assertFalse(bst.search("NOPE"));
-        assertFalse(bst.search("THINGS"));
-        assertFalse(bst.search("STUFF"));
+        Assert.assertFalse(bst.search("HELLO"));
+        Assert.assertFalse(bst.search("GOODBYE"));
+        Assert.assertFalse(bst.search("NOPE"));
+        Assert.assertFalse(bst.search("THINGS"));
+        Assert.assertFalse(bst.search("STUFF"));
     }
-    @Test
+    //@Test
     public void removePositive3(){
         BinaryST bst = new BinaryST();
 
@@ -182,11 +183,11 @@ public class BinaryST_Tests {
         bst.add("NOPE");
         bst.add("NOPE");
         bst.remove("NOPE");
-        assertTrue(bst.search("NOPE"));
+        Assert.assertTrue(bst.search("NOPE"));
         bst.remove("NOPE");
         bst.remove("NOPE");
         bst.remove("NOPE");
-        assertFalse(bst.search("NOPE"));
+        Assert.assertFalse(bst.search("NOPE"));
 
     }
 
@@ -200,11 +201,11 @@ public class BinaryST_Tests {
         bst.remove("THINGS");
         bst.remove("STUFF");
 
-        assertFalse(bst.search("HELLO"));
-        assertFalse(bst.search("GOODBYE"));
-        assertFalse(bst.search("NOPE"));
-        assertFalse(bst.search("THINGS"));
-        assertFalse(bst.search("STUFF"));
+        Assert.assertFalse(bst.search("HELLO"));
+        Assert.assertFalse(bst.search("GOODBYE"));
+        Assert.assertFalse(bst.search("NOPE"));
+        Assert.assertFalse(bst.search("THINGS"));
+        Assert.assertFalse(bst.search("STUFF"));
     }
 
     @Test
@@ -220,7 +221,7 @@ public class BinaryST_Tests {
 
         String[] s = bst.inOrder();
         for(int i =0; i<s.length; i++){
-            assertTrue(s[i].equals(array[i]));
+            Assert.assertTrue(s[i].equals(array[i]));
         }
     }
     @Test
@@ -238,7 +239,7 @@ public class BinaryST_Tests {
 
         String[] s = bst.inOrder();
         for(int i =0; i<s.length; i++){
-            assertTrue(s[i].equals(array[i]));
+            Assert.assertTrue(s[i].equals(array[i]));
         }
     }
     @Test
@@ -254,7 +255,7 @@ public class BinaryST_Tests {
 
         String[] s = bst.preOrder();
         for(int i =0; i<s.length; i++){
-            assertTrue(s[i].equals(array[i]));
+            Assert.assertTrue(s[i].equals(array[i]));
         }
     }
     @Test
@@ -272,14 +273,14 @@ public class BinaryST_Tests {
 
         String[] s = bst.preOrder();
         for(int i =0; i<s.length; i++){
-            assertTrue(s[i].equals(array[i]));
+            Assert.assertTrue(s[i].equals(array[i]));
         }
     }
     @Test
     public void height(){
         BinaryST bst = new BinaryST();
         bst.add("a");
-        assertTrue(bst.maxHeight == 1);
+        Assert.assertTrue(bst.height() == 1);
     }
     @Test
     public void height2(){
@@ -290,87 +291,137 @@ public class BinaryST_Tests {
         bst.add("d");
         bst.add("e");
         bst.add("f");
-        assertTrue(bst.maxHeight == 6);
+        Assert.assertTrue(bst.height() == 6);
     }
     @Test
+    public void height3(){
+        BinaryST bst = new BinaryST();
+        bst.add("a");
+        bst.add("b");
+        bst.add("c");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        bst.remove("f");
+        assertTrue(bst.height() == 5);
+    }
+    @Test
+    public void height4(){
+        BinaryST bst = new BinaryST();
+        bst.add("a");
+        bst.add("b");
+        bst.add("c");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        assertTrue(bst.height() == 6);
+        bst.remove("f");
+        assertTrue(bst.height() == 5);
+        bst.remove("e");
+        assertTrue(bst.height() == 4);
+        bst.remove("d");
+        assertTrue(bst.height() == 3);
+        bst.remove("c");
+        assertTrue(bst.height() == 2);
+        bst.remove("b");
+        assertTrue(bst.height() == 1);
+        bst.remove("a");
+        assertTrue(bst.height() == 0);
+    }
+
+    @Test
+    public void height5(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("a");
+        bst.add("b");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        assertTrue(bst.height() == 4);
+    }
+
+    @Test
+    public void height6(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("a");
+        bst.add("b");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        bst.remove("f");
+        assertTrue(bst.height() == 3);
+    }
+
+    @Test
+    public void height7(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("a");
+        bst.add("b");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        bst.remove("f");
+        bst.remove("e");
+        assertTrue(bst.height() == 3);
+    }
+
+    @Test
+    public void rankOf(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("a");
+        bst.add("b");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        assertTrue(bst.rankOf("a") == 0);
+    }
+    @Test
+    public void rankOf2(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("a");
+        bst.add("b");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        assertTrue(bst.rankOf("c") == 2);
+    }
+    @Test
+    public void rankOf3(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("a");
+        bst.add("b");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        assertTrue(bst.rankOf("f") == 5);
+    }
+    @Test
+    public void rankOf4(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("a");
+        bst.add("b");
+        bst.add("d");
+        bst.add("e");
+        bst.add("f");
+        bst.remove("e");
+        bst.remove("d");
+
+        assertTrue(bst.rankOf("f") == 3);
+    }
     public void compareToDemo(){
         BinaryST bst = new BinaryST();
         System.out.println("hello and nope: "+bst.compareTo("HELLO", "NOPE"));
         System.out.println("nope and hello: "+bst.compareTo("NOPE", "HELLO"));
         System.out.println("hi and hi: "+bst.compareTo("HI", "HI"));
         System.out.println("alpha and zeta: "+bst.compareTo("ALPHA", "ZETA"));
-        assertTrue(bst.size() == 5);
+        Assert.assertTrue(bst.size() == 5);
     }
-    @Test
-    public void test2(){
-        int[] a = {1,2,3,4,5,6,7,8,9,11,12,13,14,15};
-        int[] a2 = {9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-7};
-        int[] a3 =  {7,7,7,7,7,7,7,7,7,7,7,7,7,7};
-        int largest, second =0;
-
-        if(a[0] < a[1]){
-            largest = a[1];
-            second = a[0];
-        }
-        else{
-            largest = a[0];
-            second = a[1];
-        }
-        int comparisons = 1;
-
-        for(int i =2; i<a.length; i++){
-            if(a[i]>second){
-                if(a[i] >largest){
-                    second=largest;
-                    largest=a[i];
-                    comparisons+=2;
-                    }else {
-                        second = a[i];
-                        comparisons += 2;
-                    }
-                }
-                else comparisons++;
-            }
-
-        System.out.println("comparison:"+ comparisons);
-    }
-
-
-    @Test
-    public void test(){
-        int[] a3 = {1,2,3,4,5,6,7,8,9,11,12,13,14,15};
-        int[] a = {9,8,7,6,5,4,3,2,1,0};
-        //          9   7   5   3   1
-        //             9        5    1
-        //                   9        1
-        int[] a2 =  {7,7,7,7,7,7,7,7,7,7,7,7,7,7};
-        int largest, second =0;
-
-        if(a[0] < a[1]){
-            largest = a[1];
-            second = a[0];
-        }
-        else{
-            largest = a[0];
-            second = a[1];
-        }
-        int comparisons = 1;
-        for(int i =2; i<a.length; i++){
-            if(a[i] >largest){
-                second=largest;
-                largest=a[i];
-                comparisons++;
-            }
-            else{
-                if(a[i]>second){
-                    second = a[i];
-                    comparisons+=2;
-                }
-                else comparisons+=2;
-            }
-        }
-        System.out.println("comparison:"+ comparisons);
-    }
-
 
 }
