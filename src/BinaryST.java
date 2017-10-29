@@ -248,8 +248,6 @@ public class BinaryST
         return node.height;
     }
 
-
-
     /**
      *inOrder() Returns an array of Strings obtained by doing an in-order traversal of the tree.
      */
@@ -263,8 +261,8 @@ public class BinaryST
         }
         return s;
     }
+
     /**
-     *Created by Luke
      * Returns an arraylist<String> inOrder Traversal
      */
     private ArrayList<String> inOrderTraversal(Node node, ArrayList<String> list)
@@ -296,7 +294,6 @@ public class BinaryST
         return s;
     }
     /**
-     * Created by Luke
      * Returns an arraylist<String> preOrder Traversal
      */
     private ArrayList<String> preOrderTraversal(Node node, ArrayList<String> list)
