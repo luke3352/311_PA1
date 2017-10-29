@@ -11,64 +11,40 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class WarWithArray
 {
     // member fields and methods
     String[] str;
     int size;
-    public WarWithArray(String[] s, int k)
-    {
+
+    public WarWithArray(String[] s, int k) {
         str = s;
         size = k;
     }
 
-    public ArrayList<String> compute2k()
-    {
-
-        ArrayList<String> modArr = new ArrayList<>();
+    public ArrayList<String> compute2k() {
         ArrayList<String> original = new ArrayList<>(Arrays.asList(str));
-
-        modArr = original;
-
-        modArr = permute(original, modArr);
-
-
-        return modArr;
+        return permute(original);
     }
-    private ArrayList<String> permute(ArrayList<String> original, ArrayList<String> modArr) {
-        ArrayList<String> newList = new ArrayList<>();
-        for (int i = 0; i < modArr.size(); i++) {
-            for (int j = 0; j < original.size(); j++) {
-                if(checkValid(modArr.get(i)+original.get(j))){
-                    newList.add(modArr.get(i) + original.get(j));
+
+    private ArrayList<String> permute(ArrayList<String> original) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < original.size(); i++) {
+            for (int j = i+1; j < original.size(); j++) {
+                String temp = original.get(i) + original.get(j);
+                if (checkValid(temp, original)) {
+                    list.add(temp);
                 }
             }
         }
-        return newList;
+        return list;
     }
 
-    private boolean checkValid(String word){
-        char[] char1 = word.toCharArray();
-        for(int i=0; i<char1.length; i++){
-            if((i+size) <= char1.length){
-                String checkWord = "";
-                //creating the word
-                for(int j =i; j<size+i; j++){
-                        checkWord += char1[j];
-                }
-                boolean isTrue = false;
-                for(int k =0; k<str.length; k++){
-                    if(checkWord.equals(str[k])) {
-                        isTrue = true;
-                        break;
-                    }
-                }
-                if(!isTrue){
-                    return false;
-                }
+    private boolean checkValid (String s, ArrayList<String> substrings) {
+        for(int i = 1; i + size < s.length(); i++) {
+            if (!substrings.contains(s.substring(i, i+size))) {
+                return false;
             }
-            else break;
         }
         return true;
     }
