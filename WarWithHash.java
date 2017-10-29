@@ -31,9 +31,49 @@ public class WarWithHash
             hash.put(str[i],str[i]);
         }
 
+        ArrayList<String> original = new ArrayList<>(Arrays.asList(str));
+        modArr = original;
+
+
+        modArr = permute(original, hash);
 
         return modArr;
     }
+    private ArrayList<String> permute(ArrayList<String> original,  HashMap hash) {
+        ArrayList<String> newList = new ArrayList<>();
+        for (int i = 0; i < original.size(); i++) {
+            for (int j = 0; j < original.size(); j++) {
+                if(checkValid(hash.get(hash.get(original.get(i)))+original.get(j))){
+                    newList.add(hash.get(hash.get(original.get(i)))+original.get(j));
+                }
+            }
+        }
+        return newList;
+    }
 
+    private boolean checkValid(String word){
+        char[] char1 = word.toCharArray();
+        for(int i=0; i<char1.length; i++){
+            if((i+size) <= char1.length){
+                String checkWord = "";
+                //creating the word
+                for(int j =i; j<size+i; j++){
+                    checkWord += char1[j];
+                }
+                boolean isTrue = false;
+                for(int k =0; k<str.length; k++){
+                    if(hash.containsValue(checkWord)) {
+                        isTrue = true;
+                        break;
+                    }
+                }
+                if(!isTrue){
+                    return false;
+                }
+            }
+            else break;
+        }
+        return true;
+    }
 }
 

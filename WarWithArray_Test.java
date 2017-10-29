@@ -21,7 +21,7 @@ public class WarWithArray_Test {
         assertTrue(list.contains("ACAC"));
         assertTrue(list.contains("ACCA"));
         assertTrue(list.contains("ACCC"));
-        assertTrue(list.contains("CAAC"));
+        assertFalse(list.contains("CAAC"));
         assertTrue(list.contains("CACA"));
         assertTrue(list.contains("CACC"));
         assertTrue(list.contains("CCAC"));
@@ -29,49 +29,27 @@ public class WarWithArray_Test {
         assertTrue(list.contains("CCCC"));
         assertFalse(list.contains("AFKMASLFKASF"));
 
-        assertTrue(list.size() == 9);
+        assertTrue(list.size() == 8);
     }
 
     @Test
     public void test2(){
-        String[] s = {"A","B","C"};
+        String[] s = {"ABC","BCD","CDE", "DEF", "EFG", "FGH", "GHI"};
         WarWithArray war = new WarWithArray(s, 3);
 
         ArrayList<String> list = war.compute2k();
         System.out.println(list.toString());
 
-        assertTrue(list.contains("AAA"));
-        assertTrue(list.contains("AAB"));
-        assertTrue(list.contains("AAC"));
-        assertTrue(list.contains("ABA"));
-        assertTrue(list.contains("ABB"));
-        assertTrue(list.contains("ABC"));
-        assertTrue(list.contains("ACA"));
-        assertTrue(list.contains("ACB"));
-        assertTrue(list.contains("ACC"));
-        assertTrue(list.contains("BAA"));
-        assertTrue(list.contains("BAB"));
-        assertTrue(list.contains("BAC"));
-        assertTrue(list.contains("BBA"));
-        assertTrue(list.contains("BBB"));
-        assertTrue(list.contains("BBC"));
-        assertTrue(list.contains("BCA"));
-        assertTrue(list.contains("BCB"));
-        assertTrue(list.contains("BCC"));
-        assertTrue(list.contains("CAA"));
-        assertTrue(list.contains("CAB"));
-        assertTrue(list.contains("CAC"));
-        assertTrue(list.contains("CBA"));
-        assertTrue(list.contains("CBB"));
-        assertTrue(list.contains("CBC"));
-        assertTrue(list.contains("CCA"));
-        assertTrue(list.contains("CCB"));
-        assertTrue(list.contains("CCC"));
-        assertTrue(list.size() == 27);
-
-
-
+        assertTrue(list.contains("ABCDEF"));
+        assertTrue(list.contains("BCDEFG"));
+        assertTrue(list.contains("CDEFGH"));
+        assertTrue(list.contains("DEFGHI"));
         assertFalse(list.contains("AFKMASLFKASF"));
+
+        assertTrue(list.size() == 4);
     }
+
+
+
 
 }
