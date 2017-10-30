@@ -45,6 +45,15 @@ public class WarWithHash
     }
 
     private boolean checkValid(String s){
+
+        int N = s.length();
+        int t = 0; // hash value for txt
+
+        // int M = pat.length();
+        int p = 0; // hash value for pattern
+
+        int h = 1;
+
         for(int i = 1; i + size < s.length(); i++) {
             if (!hashSet.contains(s.substring(i, i+size))) {
                 return false;
