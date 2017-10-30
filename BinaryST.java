@@ -139,7 +139,7 @@ public class BinaryST
         if(root == null){
             return null;
         }
-        while(node.key != s){
+        while(!node.key.equals(s)){
             if(node != null) {
                 //go to left tree
                 if(node.key.compareTo(s) > 0){
