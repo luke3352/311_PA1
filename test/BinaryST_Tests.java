@@ -172,7 +172,7 @@ public class BinaryST_Tests {
         Assert.assertFalse(bst.search("THINGS"));
         Assert.assertFalse(bst.search("STUFF"));
     }
-    //@Test
+    @Test
     public void removePositive3(){
         BinaryST bst = new BinaryST();
 
@@ -188,7 +188,6 @@ public class BinaryST_Tests {
         bst.remove("NOPE");
         bst.remove("NOPE");
         Assert.assertFalse(bst.search("NOPE"));
-
     }
 
     @Test
@@ -366,6 +365,19 @@ public class BinaryST_Tests {
         bst.remove("f");
         bst.remove("e");
         assertTrue(bst.height() == 3);
+    }
+
+    @Test
+    public void height8(){
+        BinaryST bst = new BinaryST();
+        bst.add("c");
+        bst.add("c");
+        bst.add("c");
+        bst.add("c");
+        bst.add("c");
+        bst.add("c");
+        bst.add("a");
+        assertTrue(bst.height() == 2);
     }
 
     @Test

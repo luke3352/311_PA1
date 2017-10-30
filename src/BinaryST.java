@@ -208,6 +208,10 @@ public class BinaryST
            root = null;
            return root;
         }
+        if(node.frequency>=2){
+            node.frequency--;
+            return node;
+        }
         if(node.key.compareTo(key) > 0){
             node.left = deleteNode(node.left, key);
             if (deleted) {
