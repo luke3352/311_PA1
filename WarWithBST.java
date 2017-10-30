@@ -44,7 +44,7 @@ public class WarWithBST
     private boolean checkValid (String s) {
         for(int i = 1; i + size < s.length(); i++) {
             if (!bst.search(s.substring(i, i+size))) {
-                return false;
+                    return false;
             }
         }
         return true;
