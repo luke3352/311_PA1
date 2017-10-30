@@ -67,7 +67,10 @@ public class BinaryST
      *then this method returns 3.
      */
     public int size() {
-        return size;
+        if(root == null){
+            return 0;
+        }
+        else return size;
     }
 
     /**
@@ -75,7 +78,11 @@ public class BinaryST
      *of an empty tree is zero
      */
     public int height() {
-        return root.height;
+
+        if(root == null){
+            return 0;
+        }
+        else return root.height;
     }
 
     /**
@@ -84,7 +91,7 @@ public class BinaryST
      */
     public void add(String s)
     {
-        addRec(root, s);
+        root = addRec(root, s);
         size++;
     }
 
@@ -124,15 +131,15 @@ public class BinaryST
      */
     public boolean search(String s)
     {
-        return serachHelper(s) != null;
+        return searchHelper(s) != null;
     }
 
-    private Node serachHelper(String s) {
+    private Node searchHelper(String s) {
         Node node = root;
         if(root == null){
             return null;
         }
-        while(node.key != s){
+        while(!node.key.equals(s)){
             if(node != null) {
                 //go to left tree
                 if(node.key.compareTo(s) > 0){
@@ -189,12 +196,21 @@ public class BinaryST
         deleteNode(root, s);
         boolean temp = deleted;
         deleted = false;
+        size--;
         return temp;
     }
 
     public Node deleteNode(Node node, String key) {
         if(node == null){
             return null;
+        }
+        if(size == 1 && node.equals(root)){
+           root = null;
+           return root;
+        }
+        if(node.frequency>=2){
+            node.frequency--;
+            return node;
         }
         if(node.key.compareTo(key) > 0){
             node.left = deleteNode(node.left, key);
@@ -318,7 +334,7 @@ public class BinaryST
      */
     public int rankOf(String s)
     {
-        Node node = serachHelper(s);
+        Node node = searchHelper(s);
         if (node == null) {
             return -1;
         }
