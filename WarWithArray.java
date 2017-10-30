@@ -23,16 +23,15 @@ public class WarWithArray
     }
 
     public ArrayList<String> compute2k() {
-        ArrayList<String> original = new ArrayList<>(Arrays.asList(str));
         return permute(original);
     }
 
-    private ArrayList<String> permute(ArrayList<String> original) {
+    private ArrayList<String> permute(str) {
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < original.size(); i++) {
-            for (int j = i+1; j < original.size(); j++) {
-                String temp = original.get(i) + original.get(j);
-                if (checkValid(temp, original)) {
+        for (int i = 0; i < str.length; i++) {
+            for (int j = i+1; j < str.length; j++) {
+                String temp = str[i] + str[j];
+                if (checkValid(temp)) {
                     list.add(temp);
                 }
             }
@@ -40,13 +39,16 @@ public class WarWithArray
         return list;
     }
 
-    private boolean checkValid (String s, ArrayList<String> substrings) {
+    private boolean checkValid (String s) {
         for(int i = 1; i + size < s.length(); i++) {
-            if (!substrings.contains(s.substring(i, i+size))) {
-                return false;
+            boolean flag = false;
+            for (int i = 0 ; i < size, i++) {
+                if (str[i].equals(s)) {
+                    flag = true;
+                }
             }
         }
-        return true;
+        return flag;
     }
 }
 
